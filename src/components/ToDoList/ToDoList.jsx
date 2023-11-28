@@ -36,26 +36,21 @@ function ToDoList() {
 
   return (
     <div>
-      {isLoading ? (
-        <p>завантаження.....</p>
-      ) : (
-        <>
-          {todos && (
-            <>
-              {todos.length > 0 ? (
-                <ul>
-                  {todos.map(todo => (
-                    <li key={todo.id}>{todo.title}</li>
-                  ))}
-                </ul>
-              ) : (
-                <>{!isLoading && <p>Sorry, no matching adverts found</p>}</>
-              )}
-            </>
-          )}
-        </>
-      )}
-
+      <>
+        {todos && (
+          <>
+            {todos.length > 0 ? (
+              <ul>
+                {todos.map(todo => (
+                  <li key={todo.id}>{todo.title}</li>
+                ))}
+              </ul>
+            ) : (
+              <>{!isLoading && <p>Sorry, no matching adverts found</p>}</>
+            )}
+          </>
+        )}
+      </>
       <ButtonPrev onFindPrev={onFindPrev} />
       <span>{`${page} / ${totalPage}`}</span>
       <ButtonNext onFindMore={onFindMore} />
