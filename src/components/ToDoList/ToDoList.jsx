@@ -1,22 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectIsLoading,
+  selectPage,
+  selectToDos,
+} from '../../redux/selectors';
+import { setToDos } from '../../redux/operations';
+import { onNextPage, onPrevPage } from '../../redux/slice';
+import ButtonNext from '../ButtonLoad/ButtonLoad';
+import ButtonPrev from '../ButtonPrev/ButtonPrev';
 
 function ToDoList() {
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectIsLoading);
+  const page = useSelector(selectPage);
+  const todos = useSelector(selectToDos);
+  const totalPage = 10;
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos?_page=1&_limit=20')
-      .then(response => response.json())
-      .then(data => setData(data));
-  }, []);
+    dispatch(setToDos(page));
+  }, [dispatch, page]);
+
+  const onFindMore = () => {
+    if (page < totalPage) {
+      dispatch(onNextPage());
+    }
+  };
+
+  const onFindPrev = () => {
+    if (page > 1) {
+      dispatch(onPrevPage());
+    }
+  };
 
   return (
     <div>
-      <h1>ToDoList</h1>
-      <ul>
-        {data.map(todo => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>завантаження.....</p>
+      ) : (
+        <>
+          {todos && (
+            <>
+              {todos.length > 0 ? (
+                <ul>
+                  {todos.map(todo => (
+                    <li key={todo.id}>{todo.title}</li>
+                  ))}
+                </ul>
+              ) : (
+                <>{!isLoading && <p>Sorry, no matching adverts found</p>}</>
+              )}
+            </>
+          )}
+        </>
+      )}
+
+      <ButtonPrev onFindPrev={onFindPrev} />
+      <span>{`${page} / ${totalPage}`}</span>
+      <ButtonNext onFindMore={onFindMore} />
     </div>
   );
 }
