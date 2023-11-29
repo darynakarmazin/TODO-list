@@ -8,14 +8,13 @@ import {
   EditInput,
 } from './Todo.styled';
 import { useDispatch } from 'react-redux';
-// import { deleteTodo, editToDo } from 'redux/toDosSlice';
-import { deleteTodo } from '../../redux/operations';
+import { deleteTodo, editTodo } from '../../redux/operations';
 import { AiOutlineEdit, AiOutlineSave } from 'react-icons/ai';
 import { useState } from 'react';
 
-export const Todo = ({ text, id }) => {
+export const Todo = ({ title, id }) => {
   const [isEdit, setIsedit] = useState(false);
-  // const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('');
 
   const dispatch = useDispatch();
   const handleDelete = id => {
@@ -27,12 +26,12 @@ export const Todo = ({ text, id }) => {
   };
 
   const handleSave = () => {
-    // dispatch(editToDo({ activeId: id, query }));
+    dispatch(editTodo({ activeId: id, updatedTodo: { title: query } }));
     setIsedit(false);
   };
 
   const handleChange = e => {
-    // setQuery(e.target.value);
+    setQuery(e.target.value);
   };
 
   return (
@@ -52,9 +51,9 @@ export const Todo = ({ text, id }) => {
         <Text>TODO #</Text>
         <Text>
           {!isEdit ? (
-            <>{text}</>
+            <>{title}</>
           ) : (
-            <EditInput defaultValue={text} onChange={handleChange} />
+            <EditInput defaultValue={title} onChange={handleChange} />
           )}
         </Text>
         <DeleteButton type="button" onClick={() => handleDelete(id)}>

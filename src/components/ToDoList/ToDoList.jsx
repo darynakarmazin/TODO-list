@@ -39,7 +39,7 @@ function ToDoList() {
         {todos.length > 0 &&
           todos.map(({ id, title }) => (
             <ListItem key={id}>
-              <Todo id={id} text={title} />
+              <Todo id={id} title={title} />
             </ListItem>
           ))}
       </List>
