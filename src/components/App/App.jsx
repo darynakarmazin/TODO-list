@@ -1,6 +1,6 @@
 import { Container } from '../Container/Container.styled';
 import Header from '../Header/Header';
-import { SearchForm } from '../SearchForm/SearchForm';
+import { InputForm } from '../InputForm/InputForm';
 import ToDoList from '../ToDoList/ToDoList';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <>
       <Header />
       <Container>
-        <SearchForm />
+        <InputForm />
         <ToDoList />
       </Container>
     </>

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { setToDos } from './operations';
+import { addTodo, fetchTodos } from './operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -19,14 +19,20 @@ const catalogSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(setToDos.pending, handlePending)
-      .addCase(setToDos.fulfilled, (state, action) => {
+      .addCase(fetchTodos.pending, handlePending)
+      .addCase(fetchTodos.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        // state.todos = [...state.todos, ...action.payload];
         state.todos = [...action.payload];
       })
-      .addCase(setToDos.rejected, handleRejected);
+      .addCase(fetchTodos.rejected, handleRejected)
+      .addCase(addTodo.pending, handlePending)
+      .addCase(addTodo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.todos.push(action.payload);
+      })
+      .addCase(addTodo.rejected, handleRejected);
   },
   reducers: {
     onNextPage: state => {
