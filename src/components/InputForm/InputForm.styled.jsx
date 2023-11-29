@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SearchFormStyled = styled.form`
-  width: 400px;
+  width: 380px;
   margin-left: auto;
   margin-right: auto;
   position: relative;

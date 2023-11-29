@@ -1,4 +1,5 @@
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { AiOutlineEdit, AiOutlineSave } from 'react-icons/ai';
 import { Text } from '../Text/Text.styled';
 import {
   DeleteButton,
@@ -9,25 +10,26 @@ import {
 } from './Todo.styled';
 import { useDispatch } from 'react-redux';
 import { deleteTodo, editTodo } from '../../redux/operations';
-import { AiOutlineEdit, AiOutlineSave } from 'react-icons/ai';
 import { useState } from 'react';
 
 export const Todo = ({ title, id }) => {
-  const [isEdit, setIsedit] = useState(false);
+  // State to determine if the editing mode is active
+  const [isEdit, setIsEdit] = useState(false);
   const [query, setQuery] = useState('');
 
   const dispatch = useDispatch();
+
   const handleDelete = id => {
     dispatch(deleteTodo(id));
   };
 
   const handleEdit = () => {
-    setIsedit(true);
+    setIsEdit(true);
   };
 
   const handleSave = () => {
     dispatch(editTodo({ activeId: id, updatedTodo: { title: query } }));
-    setIsedit(false);
+    setIsEdit(false);
   };
 
   const handleChange = e => {
@@ -48,6 +50,7 @@ export const Todo = ({ title, id }) => {
             </EditButton>
           )}
         </EditWrapper>
+
         <Text>TODO #</Text>
         <Text>
           {!isEdit ? (
@@ -56,6 +59,8 @@ export const Todo = ({ title, id }) => {
             <EditInput defaultValue={title} onChange={handleChange} />
           )}
         </Text>
+
+        {/* Button for deleting the task */}
         <DeleteButton type="button" onClick={() => handleDelete(id)}>
           <RiDeleteBinLine size={24} />
         </DeleteButton>
