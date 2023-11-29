@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTodo, deleteTodo, editTodo, fetchTodos } from './operations';
+import {
+  addTodo,
+  completeTodo,
+  deleteTodo,
+  editTodo,
+  fetchTodos,
+} from './operations';
 import { nanoid } from 'nanoid';
 
 // Handlers for pending and rejected actions
@@ -60,6 +66,24 @@ const catalogSlice = createSlice({
               return {
                 ...todo,
                 title: updatedTodo.title,
+              };
+            } else return todo;
+          });
+        }
+      )
+      .addCase(completeTodo.rejected, handleRejected)
+      .addCase(completeTodo.pending, handlePending)
+      .addCase(
+        completeTodo.fulfilled,
+        (state, { payload: { activeId, updatedTodo } }) => {
+          state.isLoading = false;
+          state.error = null;
+          state.todos = state.todos.map(todo => {
+            const { id } = todo;
+            if (id === activeId) {
+              return {
+                ...todo,
+                completed: updatedTodo.completed,
               };
             } else return todo;
           });

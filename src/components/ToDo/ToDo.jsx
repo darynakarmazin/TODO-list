@@ -1,5 +1,6 @@
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { AiOutlineEdit, AiOutlineSave } from 'react-icons/ai';
+import { BiCircle, BiChevronDownCircle } from 'react-icons/bi';
 import { Text } from '../Text/Text.styled';
 import {
   DeleteButton,
@@ -7,12 +8,13 @@ import {
   TodoWrapper,
   EditWrapper,
   EditInput,
+  CompletedButton,
 } from './Todo.styled';
 import { useDispatch } from 'react-redux';
-import { deleteTodo, editTodo } from '../../redux/operations';
+import { completeTodo, deleteTodo, editTodo } from '../../redux/operations';
 import { useState } from 'react';
 
-export const Todo = ({ title, id }) => {
+export const Todo = ({ title, id, completed }) => {
   // State to determine if the editing mode is active
   const [isEdit, setIsEdit] = useState(false);
   const [query, setQuery] = useState('');
@@ -36,17 +38,23 @@ export const Todo = ({ title, id }) => {
     setQuery(e.target.value);
   };
 
+  const handleCompleted = () => {
+    dispatch(
+      completeTodo({ activeId: id, updatedTodo: { completed: !completed } })
+    );
+  };
+
   return (
     <>
       <TodoWrapper>
         <EditWrapper>
           {!isEdit ? (
             <EditButton onClick={() => handleEdit()}>
-              <AiOutlineEdit size={24} />
+              <AiOutlineEdit size={28} />
             </EditButton>
           ) : (
             <EditButton onClick={() => handleSave()}>
-              <AiOutlineSave size={24} />
+              <AiOutlineSave size={28} />
             </EditButton>
           )}
         </EditWrapper>
@@ -59,6 +67,16 @@ export const Todo = ({ title, id }) => {
             <EditInput defaultValue={title} onChange={handleChange} />
           )}
         </Text>
+
+        {completed ? (
+          <CompletedButton type="button" onClick={handleCompleted}>
+            <BiChevronDownCircle size={32} />
+          </CompletedButton>
+        ) : (
+          <CompletedButton type="button" onClick={handleCompleted}>
+            <BiCircle size={32} />
+          </CompletedButton>
+        )}
 
         {/* Button for deleting the task */}
         <DeleteButton type="button" onClick={() => handleDelete(id)}>

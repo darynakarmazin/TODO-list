@@ -55,3 +55,18 @@ export const EditInput = styled.input`
   border-bottom: 1px solid darkgray;
   background-color: transparent;
 `;
+
+export const CompletedButton = styled.button`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  -webkit-transition: -webkit-transform 0.25s
+    cubic-bezier(0.7, 0.98, 0.86, 0.98);
+  transition: transform 0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+  }
+`;

@@ -37,9 +37,9 @@ function ToDoList() {
     <div>
       <List>
         {todos.length > 0 &&
-          todos.map(({ id, title }) => (
+          todos.map(({ id, title, completed }) => (
             <ListItem key={id}>
-              <Todo id={id} title={title} />
+              <Todo id={id} title={title} completed={completed} />
             </ListItem>
           ))}
       </List>

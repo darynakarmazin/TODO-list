@@ -60,3 +60,17 @@ export const editTodo = createAsyncThunk(
     }
   }
 );
+
+// completeTodo - Edit a todo (PATCH method).
+export const completeTodo = createAsyncThunk(
+  'catalog/completeTodo',
+  async ({ activeId, updatedTodo }, thunkAPI) => {
+    try {
+      // Make a PATCH request to edit an existing todo
+      await axios.patch(`${path}/${activeId}`, updatedTodo);
+      return { activeId, updatedTodo };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
