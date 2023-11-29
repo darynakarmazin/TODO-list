@@ -30,16 +30,16 @@ Teclology stack [React, Redux, Fetch, Git, CRUD, html5, styled-components, gh-pa
 
 
 Decktop
-![LogIn page](https://github.com/darynakarmazin/miraplay_test_client/raw/main/src/img/img-1.png)
+![LogIn page](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-1.png)
 
 Tab
-![Registration page](https://github.com/darynakarmazin/miraplay_test_client/raw/main/src/img/img-2.png)
+![Registration page](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-2.png)
 
 Mobile
-![Catalog page](https://github.com/darynakarmazin/miraplay_test_client/raw/main/src/img/img-3.png)
+![Catalog page](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-3.png)
 
 Pagination
-![Games cards](https://github.com/darynakarmazin/miraplay_test_client/raw/main/src/img/img-4.png)
+![Games cards](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-4.png)
 
 Editing
-![Pagination button](https://github.com/darynakarmazin/miraplay_test_client/raw/main/src/img/img-5.png)
+![Pagination button](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-5.png)
