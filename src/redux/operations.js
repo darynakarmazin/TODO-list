@@ -36,11 +36,11 @@ export const addTodo = createAsyncThunk(
 // deleteTodo - Delete a todo (DELETE method).
 export const deleteTodo = createAsyncThunk(
   'catalog/deleteTodo',
-  async (id, thunkAPI) => {
+  async (removeId, thunkAPI) => {
     try {
       // Make a DELETE request to remove a todo by its id
-      const response = await axios.delete(`${path}/${id}`);
-      return response.data;
+      await axios.delete(`${path}/${removeId}`);
+      return removeId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

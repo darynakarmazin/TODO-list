@@ -40,9 +40,7 @@ const catalogSlice = createSlice({
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.todos.findIndex(
-          todo => todo.id === action.payload.id
-        );
+        const index = state.todos.findIndex(todo => todo.id === action.payload);
         state.todos.splice(index, 1);
       })
       .addCase(addTodo.rejected, handleRejected);
