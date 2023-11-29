@@ -78,4 +78,4 @@ const catalogSlice = createSlice({
 });
 
 export const { onNextPage, onPrevPage } = catalogSlice.actions;
-export default catalogSlice.reducer;
+export const catalogReducer = catalogSlice.reducer;
