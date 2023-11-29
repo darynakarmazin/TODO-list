@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTodo, fetchTodos } from './operations';
+import { addTodo, deleteTodo, fetchTodos } from './operations';
 
+// Handlers for pending and rejected actions
 const handlePending = state => {
   state.isLoading = true;
 };
+
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
@@ -18,6 +20,7 @@ const catalogSlice = createSlice({
     page: 1,
   },
   extraReducers: builder => {
+    // Handling async actions using extraReducers
     builder
       .addCase(fetchTodos.pending, handlePending)
       .addCase(fetchTodos.fulfilled, (state, action) => {
@@ -32,8 +35,19 @@ const catalogSlice = createSlice({
         state.error = null;
         state.todos.push(action.payload);
       })
+      .addCase(deleteTodo.rejected, handleRejected)
+      .addCase(deleteTodo.pending, handlePending)
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        const index = state.todos.findIndex(
+          todo => todo.id === action.payload.id
+        );
+        state.todos.splice(index, 1);
+      })
       .addCase(addTodo.rejected, handleRejected);
   },
+  // Reducers for synchronous actions
   reducers: {
     onNextPage: state => {
       state.page = state.page + 1;

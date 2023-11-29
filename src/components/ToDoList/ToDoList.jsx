@@ -1,25 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectIsLoading,
-  selectPage,
-  selectToDos,
-} from '../../redux/selectors';
-import { setToDos } from '../../redux/operations';
+import { selectPage, selectToDos } from '../../redux/selectors';
+import { fetchTodos } from '../../redux/operations';
 import { onNextPage, onPrevPage } from '../../redux/slice';
-import ButtonNext from '../ButtonLoad/ButtonLoad';
-import ButtonPrev from '../ButtonPrev/ButtonPrev';
+import { List, ListItem } from '../Grid/Grid.styled';
+import { Todo } from '../ToDo/ToDo';
+import ButtonPrev from '../Buttons/ButtonPrev';
+import ButtonNext from '../Buttons/ButtonLoad';
+import { ButtonWrapper } from '../Buttons/Buttons.styled';
 
 function ToDoList() {
   const dispatch = useDispatch();
 
-  const isLoading = useSelector(selectIsLoading);
   const page = useSelector(selectPage);
   const todos = useSelector(selectToDos);
-  const totalPage = 10;
+  const totalPage = 25; // Total number of pages
 
   useEffect(() => {
-    dispatch(setToDos(page));
+    dispatch(fetchTodos(page));
   }, [dispatch, page]);
 
   const onFindMore = () => {
@@ -28,6 +26,7 @@ function ToDoList() {
     }
   };
 
+  // Handler for loading todos from the previous page
   const onFindPrev = () => {
     if (page > 1) {
       dispatch(onPrevPage());
@@ -36,24 +35,21 @@ function ToDoList() {
 
   return (
     <div>
-      <>
-        {todos && (
-          <>
-            {todos.length > 0 ? (
-              <ul>
-                {todos.map(todo => (
-                  <li key={todo.id}>{todo.title}</li>
-                ))}
-              </ul>
-            ) : (
-              <>{!isLoading && <p>Sorry, no matching adverts found</p>}</>
-            )}
-          </>
-        )}
-      </>
-      <ButtonPrev onFindPrev={onFindPrev} />
-      <span>{`${page} / ${totalPage}`}</span>
-      <ButtonNext onFindMore={onFindMore} />
+      <List>
+        {todos.length > 0 &&
+          todos.map(({ id, title }) => (
+            <ListItem key={id}>
+              <Todo id={id} text={title} />
+            </ListItem>
+          ))}
+      </List>
+
+      {/* Buttons for navigating between pages */}
+      <ButtonWrapper>
+        <ButtonPrev onFindPrev={onFindPrev} />
+        <span>{`${page} / ${totalPage}`}</span>
+        <ButtonNext onFindMore={onFindMore} />
+      </ButtonWrapper>
     </div>
   );
 }
