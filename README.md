@@ -30,16 +30,16 @@ Teclology stack [React, Redux, Fetch, Git, CRUD, html5, styled-components, gh-pa
 
 
 Decktop
-![LogIn page](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-1.png)
+![Decktop page](https://github.com/darynakarmazin/todo-list/raw/main/src/img/img-1.png)
 
 Tab
-![Registration page](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-2.png)
+![Tab page](https://github.com/darynakarmazin/todo-list/raw/main/src/img/img-2.png)
 
 Mobile
-![Catalog page](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-3.png)
+![Mobile page](https://github.com/darynakarmazin/todo-list/raw/main/src/img/img-3.png)
 
 Pagination
-![Games cards](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-4.png)
+![Pagination](https://github.com/darynakarmazin/todo-list/raw/main/src/img/img-4.png)
 
 Editing
-![Pagination button](https://github.com/darynakarmazin/todo-lis/raw/main/src/img/img-5.png)
+![Editing](https://github.com/darynakarmazin/todo-list/raw/main/src/img/img-5.png)
