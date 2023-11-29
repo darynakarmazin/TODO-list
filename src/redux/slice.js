@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addTodo, deleteTodo, fetchTodos } from './operations';
+import { nanoid } from 'nanoid';
 
 // Handlers for pending and rejected actions
 const handlePending = state => {
@@ -33,7 +34,9 @@ const catalogSlice = createSlice({
       .addCase(addTodo.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.todos.push(action.payload);
+        // Generate a new id using nanoid
+        const newId = nanoid();
+        state.todos.push({ ...action.payload, id: newId });
       })
       .addCase(deleteTodo.rejected, handleRejected)
       .addCase(deleteTodo.pending, handlePending)
