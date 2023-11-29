@@ -1,13 +1,15 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
+const path = '/todos';
 
-export const setToDos = createAsyncThunk(
+// fetchToDos - одержання масиву todos (метод GET) запитом.
+export const fetchToDos = createAsyncThunk(
   'catalog/fetchToDos',
   async (page, thunkAPI) => {
     try {
-      const res = await axios.get(`/todos?_page=${page}&_limit=20`);
+      const res = await axios.get(`${path}?_page=${page}&_limit=8`);
       return res.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
